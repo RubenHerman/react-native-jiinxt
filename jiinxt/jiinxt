@@ -1,0 +1,39 @@
+#!/bin/bash
+INITIAL_DIR="$PWD"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. $SCRIPT_DIR/functions.sh
+
+
+
+case $1 in
+	"--help")
+		jHelp
+		;;
+
+	"init" | "create")
+		checkSecondArg "Create requires a second argument defining the project name!" initNewProject $2
+		;;
+
+	"add-type")
+		checkSecondArg "add-type requres a second argument defining the type name!" createNewType $2
+		;;
+
+	"add-reducer")
+		checkSecondArg "add-reducer requres a second argument defining the reducer name!" createNewReducer $2
+		;;
+
+	"add-action")
+		checkSecondArg "add-action requres a second argument defining the action name!" createNewAction $2
+		;;
+
+	"add-component")
+		checkSecondArg "add-action requres a second argument defining the action name!" createNewComponent $2
+		;;
+
+	*)
+		jHelp
+		exit 1
+		;;
+esac
+
+cd $INITIAL_DIR

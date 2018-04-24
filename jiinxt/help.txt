@@ -1,0 +1,31 @@
+===============================================================
+===============================================================
+===========            Jiinxt Help                =============
+===============================================================
+===============================================================
+
+--help: 
+	This help page, describes the available commands.
+
+
+init or create:
+	Params: Requires project name.
+	Creates a new base react-native project.
+
+add-type:
+	Params: Requires type name.
+	Creates a new type in src/actions/types.js
+
+add-reducer:
+	Params: Requires reducer name.
+	Creates a new reducer in src/reducers and adds it to
+	CombineReducers in src/reducers/index.js
+
+add-action:
+	Params: Requires action name.
+	Creates a new actions file in src/actions and exports
+	it in src/actions/index.js
+
+add-component:
+	Params: Requires component name.
+	Creates a new component in src/components.
