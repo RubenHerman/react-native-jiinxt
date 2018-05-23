@@ -90,11 +90,14 @@ updateJiinxt() {
     jiinxtVersion=$(grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
     cd ~
-    wget https://github.com/Jiinxt/react-native-jiinxt/archive/${jiinxtVersion}.zip
+    mkdir Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
+    cd Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
+
+    curl https://github.com/Jiinxt/react-native-jiinxt/archive/${jiinxtVersion}.zip --output ${jiinxtVersion}.zip
     unzip ${jiinxtVersion}.zip
     cd ${jiinxtVersion}
     /bin/bash jiinxt-installer.sh
-    rm -rf ~/${jiinxtVersion}
+    rm -rf ~/Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
 
     echo "Updated to ${jiinxtVersion}!"
 }
