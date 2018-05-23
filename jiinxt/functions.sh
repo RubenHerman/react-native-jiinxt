@@ -15,8 +15,16 @@ checkSecondArg()
 
 checkAtRoot()
 {
-	if [ ! -f index.js ] && [ ! -d src ] && [ ! -d node_modules ]; then
+	if [ ! -d src ] && [ ! -d node_modules ]; then
     	echo "Command must be ran from the root of a react-native project!"
+    	exit 1
+	fi
+}
+
+checkAtExpoRoot()
+{
+	if [ ! -f App.js ]  && [ ! -d node_modules ]; then
+    	echo "Command must be ran from the root of a react-native expo project!"
     	exit 1
 	fi
 }
@@ -46,9 +54,11 @@ initNewProject()
 
 	if [ "$1" != "expo" ]; then
 		react-native init $1
+		cd $1
+	else
+		checkAtExpoRoot
 	fi
 
-	cd $1
 	npm install --save lodash
 	npm install --save react-native-communications
 	npm install --save react-native-router-flux
@@ -57,16 +67,17 @@ initNewProject()
 	npm install --save redux-thunk
 	npm install --save react-native-elements
 
-	if [ "$1" != "expo" ]; then
-		rm index.js
-	fi
-
 	rm App.js
-
-	cp $SCRIPT_DIR/react-native-base/index.js ./index.js
 	cp -rv $SCRIPT_DIR/react-native-base/src ./src
 
-	replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
+    if [ "$1" != "expo" ]; then
+		cp $SCRIPT_DIR/react-native-base/index.js ./index.js
+		replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
+		rm index.js
+	else
+		cp $SCRIPT_DIR/react-native-base/index.js ./App.js
+		replaceVar "###JIINXT_PROJECT_NAME###" "$1" App.js
+	fi
 
 	echo "React-Native project ready!"
 }
