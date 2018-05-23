@@ -51,6 +51,7 @@ initNewProject()
 	npm install --save redux
 	npm install --save react-redux
 	npm install --save redux-thunk
+	npm install --save react-native-elements
 
 	rm index.js
 	rm App.js
@@ -61,6 +62,41 @@ initNewProject()
 	replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
 
 	echo "React-Native project ready!"
+}
+
+initNewExpoProject()
+{
+	npm install --save lodash
+	npm install --save react-native-communications
+	npm install --save react-native-router-flux
+	npm install --save redux
+	npm install --save react-redux
+	npm install --save redux-thunk
+	npm install --save react-native-elements
+
+	rm index.js
+	rm App.js
+
+	cp $SCRIPT_DIR/react-native-base/index.js ./index.js
+	cp -rv $SCRIPT_DIR/react-native-base/src ./src
+
+	replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
+
+	echo "React-Native project ready!"
+}
+
+updateJiinxt() {
+    curl --silent "https://api.github.com/repos/Jiinxt/react-native-jiinxt/releases/latest" | # Get latest release from GitHub api
+    jiinxtVersion=$(grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+
+    cd ~
+    wget https://github.com/Jiinxt/react-native-jiinxt/archive/${jiinxtVersion}.zip
+    unzip ${jiinxtVersion}.zip
+    cd ${jiinxtVersion}
+    /bin/bash jiinxt-installer.sh
+    rm -rf ~/${jiinxtVersion}
+
+    echo "Updated to ${jiinxtVersion}!"
 }
 
 createNewComponent()

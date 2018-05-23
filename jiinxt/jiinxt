@@ -10,6 +10,10 @@ case $1 in
 		jHelp
 		;;
 
+	"init expo")
+		initNewExpoProject
+		;;
+
 	"init" | "create")
 		checkSecondArg "Create requires a second argument defining the project name!" initNewProject $2
 		;;
@@ -28,6 +32,10 @@ case $1 in
 
 	"add-component")
 		checkSecondArg "add-action requres a second argument defining the action name!" createNewComponent $2
+		;;
+
+	"update-jiinxt")
+		update
 		;;
 
 	*)
