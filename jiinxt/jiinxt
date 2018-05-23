@@ -16,11 +16,6 @@ case $1 in
 		exit 0
 		;;
 
-	"init expo")
-		initNewExpoProject
-		exit 0
-		;;
-
 	"init" | "create")
 		checkSecondArg "Create requires a second argument defining the project name!" initNewProject $2
 		exit 0

@@ -41,10 +41,8 @@ removeLastLine()
 	rm $1.jiinxt
 }
 
-initNewProject()
+initNewExpoProject()
 {
-	react-native init $1
-	cd $1
 	npm install --save lodash
 	npm install --save react-native-communications
 	npm install --save react-native-router-flux
@@ -64,8 +62,16 @@ initNewProject()
 	echo "React-Native project ready!"
 }
 
-initNewExpoProject()
+initNewProject()
 {
+
+	if [ "$1" = "expo" ]; then
+		initNewExpoProject
+		exit 0
+	fi
+
+	react-native init $1
+	cd $1
 	npm install --save lodash
 	npm install --save react-native-communications
 	npm install --save react-native-router-flux
