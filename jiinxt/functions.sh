@@ -86,16 +86,16 @@ initNewExpoProject()
 }
 
 updateJiinxt() {
-    curl --silent "https://api.github.com/repos/Jiinxt/react-native-jiinxt/releases/latest" | # Get latest release from GitHub api
-    jiinxtVersion=$(grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+    jiinxtVersion=$(curl --silent "https://api.github.com/repos/Jiinxt/react-native-jiinxt/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 
     cd ~
     mkdir Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
     cd Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
 
-    curl https://github.com/Jiinxt/react-native-jiinxt/archive/${jiinxtVersion}.zip --output ${jiinxtVersion}.zip
+    curl https://codeload.github.com/Jiinxt/react-native-jiinxt/zip/${jiinxtVersion} --output ${jiinxtVersion}.zip
     unzip ${jiinxtVersion}.zip
-    cd ${jiinxtVersion}
+    cd $(ls | grep "react-native-jiinxt")
+    
     /bin/bash jiinxt-installer.sh
     rm -rf ~/Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
 
