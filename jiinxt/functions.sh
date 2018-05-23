@@ -41,36 +41,13 @@ removeLastLine()
 	rm $1.jiinxt
 }
 
-initNewExpoProject()
-{
-	npm install --save lodash
-	npm install --save react-native-communications
-	npm install --save react-native-router-flux
-	npm install --save redux
-	npm install --save react-redux
-	npm install --save redux-thunk
-	npm install --save react-native-elements
-
-	rm index.js
-	rm App.js
-
-	cp $SCRIPT_DIR/react-native-base/index.js ./index.js
-	cp -rv $SCRIPT_DIR/react-native-base/src ./src
-
-	replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
-
-	echo "React-Native project ready!"
-}
-
 initNewProject()
 {
 
-	if [ "$1" = "expo" ]; then
-		initNewExpoProject
-		exit 0
+	if [ "$1" != "expo" ]; then
+		react-native init $1
 	fi
 
-	react-native init $1
 	cd $1
 	npm install --save lodash
 	npm install --save react-native-communications
@@ -80,7 +57,10 @@ initNewProject()
 	npm install --save redux-thunk
 	npm install --save react-native-elements
 
-	rm index.js
+	if [ "$1" != "expo" ]; then
+		rm index.js
+	fi
+
 	rm App.js
 
 	cp $SCRIPT_DIR/react-native-base/index.js ./index.js
