@@ -3,39 +3,52 @@ INITIAL_DIR="$PWD"
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . $SCRIPT_DIR/functions.sh
 
-
+VERSION="v.1.1.0"
 
 case $1 in
 	"--help")
 		jHelp
+		exit 0
+		;;
+
+	"--version")
+		echo "Jiinxt Version: ${VERSION}"
+		exit 0
 		;;
 
 	"init expo")
 		initNewExpoProject
+		exit 0
 		;;
 
 	"init" | "create")
 		checkSecondArg "Create requires a second argument defining the project name!" initNewProject $2
+		exit 0
 		;;
 
 	"add-type")
 		checkSecondArg "add-type requres a second argument defining the type name!" createNewType $2
+		exit 0
 		;;
 
 	"add-reducer")
 		checkSecondArg "add-reducer requres a second argument defining the reducer name!" createNewReducer $2
+		exit 0
 		;;
 
 	"add-action")
 		checkSecondArg "add-action requres a second argument defining the action name!" createNewAction $2
+		exit 0
 		;;
 
 	"add-component")
 		checkSecondArg "add-action requres a second argument defining the action name!" createNewComponent $2
+		exit 0
 		;;
 
 	"update-jiinxt")
 		updateJiinxt
+		exit 0
 		;;
 
 	*)
