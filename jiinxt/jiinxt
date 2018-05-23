@@ -35,7 +35,7 @@ case $1 in
 		;;
 
 	"update-jiinxt")
-		update
+		updateJiinxt
 		;;
 
 	*)
