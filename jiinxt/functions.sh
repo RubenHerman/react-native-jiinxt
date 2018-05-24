@@ -15,8 +15,16 @@ checkSecondArg()
 
 checkAtRoot()
 {
-	if [ ! -f index.js ] && [ ! -d src ] && [ ! -d node_modules ]; then
+	if [ ! -d src ] && [ ! -d node_modules ]; then
     	echo "Command must be ran from the root of a react-native project!"
+    	exit 1
+	fi
+}
+
+checkAtExpoRoot()
+{
+	if [ ! -f App.js ]  && [ ! -d node_modules ]; then
+    	echo "Command must be ran from the root of a react-native expo project!"
     	exit 1
 	fi
 }
@@ -43,24 +51,57 @@ removeLastLine()
 
 initNewProject()
 {
-	react-native init $1
-	cd $1
+
+	if [ "$1" != "expo" ]; then
+		react-native init $1
+		cd $1
+	else
+		checkAtExpoRoot
+	fi
+
 	npm install --save lodash
 	npm install --save react-native-communications
 	npm install --save react-native-router-flux
 	npm install --save redux
 	npm install --save react-redux
 	npm install --save redux-thunk
+	npm install --save react-native-elements
 
-	rm index.js
 	rm App.js
-
-	cp $SCRIPT_DIR/react-native-base/index.js ./index.js
 	cp -rv $SCRIPT_DIR/react-native-base/src ./src
 
-	replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
+    if [ "$1" != "expo" ]; then
+		cp $SCRIPT_DIR/react-native-base/index.js ./index.js
+		replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
+		rm index.js
+	else
+		cp $SCRIPT_DIR/react-native-base/App.js ./App.js
+	fi
+
+	# Just to be safe, lets run npm install again.
+	npm install
 
 	echo "React-Native project ready!"
+	if [ "$1" = "expo" ]; then
+		echo "You may need to restart Expo XDE!"
+	fi
+}
+
+updateJiinxt() {
+    jiinxtVersion=$(curl --silent "https://api.github.com/repos/Jiinxt/react-native-jiinxt/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+
+    cd ~
+    mkdir Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
+    cd Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
+
+    curl https://codeload.github.com/Jiinxt/react-native-jiinxt/zip/${jiinxtVersion} --output ${jiinxtVersion}.zip
+    unzip ${jiinxtVersion}.zip
+    cd $(ls | grep "react-native-jiinxt")
+    
+    /bin/bash jiinxt-installer.sh
+    rm -rf ~/Jiinxt-Update-2l3kn42l3knosidnvanl2n34liasdv9alsdnf2d
+
+    echo "Updated to ${jiinxtVersion}!"
 }
 
 createNewComponent()
