@@ -75,9 +75,11 @@ initNewProject()
 		replaceVar "###JIINXT_PROJECT_NAME###" "$1" index.js
 		rm index.js
 	else
-		cp $SCRIPT_DIR/react-native-base/index.js ./App.js
-		replaceVar "###JIINXT_PROJECT_NAME###" "$1" App.js
+		cp $SCRIPT_DIR/react-native-base/App.js ./App.js
 	fi
+
+	# Just to be safe, lets run npm install again.
+	npm install
 
 	echo "React-Native project ready!"
 }
