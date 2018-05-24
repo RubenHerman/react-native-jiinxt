@@ -7,10 +7,17 @@
 --help: 
 	This help page, describes the available commands.
 
+--version: 
+	Displays the current Jiinxt Version
+
 
 init or create:
 	Params: Requires project name.
 	Creates a new base react-native project.
+
+init expo:
+    Params: None.
+    Initializes an Expo project for use with this tool.
 
 add-type:
 	Params: Requires type name.
@@ -29,3 +36,7 @@ add-action:
 add-component:
 	Params: Requires component name.
 	Creates a new component in src/components.
+
+update-jiinxt:
+	Params: None
+	Updates this tool with the latest from github.

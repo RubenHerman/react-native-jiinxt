@@ -18,7 +18,7 @@ class ExampleComponent extends Component
                 </CardSection>
                 <CardSection style={styles.containerStyle}>
                     <Text>
-                        Utilizing: Redux, React-Redux, Redux-Thunk, React-Native-Router-Flux, React-Native-Communications.
+                        Utilizing: Redux, React-Redux, Redux-Thunk, React-Native-Router-Flux, React-Native-Communications, and React-Native-Elements.
                     </Text>
                 </CardSection>
                 <CardSection style={styles.containerStyle}>

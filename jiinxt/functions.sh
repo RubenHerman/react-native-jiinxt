@@ -82,6 +82,9 @@ initNewProject()
 	npm install
 
 	echo "React-Native project ready!"
+	if [ "$1" = "expo" ]; then
+		echo "You may need to restart Expo XDE!"
+	fi
 }
 
 updateJiinxt() {
