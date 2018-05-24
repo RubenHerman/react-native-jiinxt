@@ -7,11 +7,20 @@ Jiinxt is a command line tool that makes creating boilerplate for Components, Re
 ```sh
     /bin/bash jiinxt-installer.sh
  ```
-  
+## Requirements
+Note that the installer does not check that these dependencies are installed, be sure you have all these components before utilizing this tool.
+* React-Native
+* React-Native-CLI
+* CURL
+* Bash
+* NPM
+* grep
+* sed
+
 ## Usage
 1. `jiinxt init $project_name` || `jiinxt init expo` 
    * Creates a new blank react-native project that can be used with the jiinxt tool. 
-   * if you use `jiinxt init expo` it will turn an expo project into a project that can be used with both expo and jiinxt
+   * If you use `jiinxt init expo` it will turn an expo project into a project that can be used with both expo and jiinxt
    * Also installs the following npm modules:
        * lodash
        * react-native-communications
